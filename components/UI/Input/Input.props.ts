@@ -23,4 +23,5 @@ export interface IInput
 export interface IPropsInput extends ComponentPropsWithoutRef<"input"> {
   label: string;
   error?: boolean;
+  optional?: boolean
 }

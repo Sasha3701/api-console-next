@@ -1,3 +1,4 @@
 import Logo from "./Logo";
+import AuthComponent from "./AuthComponent";
 
-export { Logo };
+export { Logo, AuthComponent };

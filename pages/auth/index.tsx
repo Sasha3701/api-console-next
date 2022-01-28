@@ -1,12 +1,8 @@
 import { NextPage } from "next";
-import Head from "next/head";
+import { AuthComponent } from "../../components";
 
 const Auth: NextPage = (): JSX.Element => {
-  return (
-    <>
-      <div>Auth</div>
-    </>
-  );
+  return <AuthComponent />
 };
 
 export default Auth;

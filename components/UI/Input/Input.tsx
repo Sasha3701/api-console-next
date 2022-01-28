@@ -4,6 +4,7 @@ import { IInput, ILabel, IPropsInput } from "./Input.props";
 
 const Label = styled.label<ILabel>`
   display: flex;
+  position: relative;
   flex-direction: column;
   line-height: 20px;
   font-size: 16px;
@@ -35,11 +36,22 @@ const CustomInput = styled.input<IInput>`
   }
 `;
 
+const Optional = styled.p`
+  position: absolute;
+  top: 0;
+  right: 0;
+  line-height: 20px;
+  color: var(--text-color-gray);
+  font-size: 12px;
+  margin: 0;
+`
+
 const Input = forwardRef<HTMLInputElement, IPropsInput>(
-  ({ label, style, error = true, ...props }, ref): JSX.Element => {
+  ({ label, style, error = false, optional = false, ...props }, ref): JSX.Element => {
     return (
       <Label error={error} style={style}>
         {label}
+        {optional ? <Optional>Опционально</Optional> : null}
         <CustomInput error={error} ref={ref} {...props} />
       </Label>
     );

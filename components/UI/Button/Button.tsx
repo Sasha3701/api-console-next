@@ -16,6 +16,7 @@ const ButtonFill = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   &:hover {
     opacity: 0.85;
   }
@@ -28,6 +29,7 @@ const ButtonFill = styled.button`
   }
   &:disabled {
     background: var(--gradient-gray);
+    cursor: not-allowed;
   }
 `;
 
