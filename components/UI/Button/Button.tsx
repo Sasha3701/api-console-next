@@ -6,13 +6,14 @@ import { IPropsButton } from "./Button.props";
 const ButtonFill = styled.button`
   background: var(--gradient-blue);
   color: var(--text-colot-white);
-  padding: 12px 31px;
+  padding: 5px 31px;
   border-radius: 5px;
   border: none;
   font-size: 16px;
   transition: all 0.3s;
   outline: none;
   min-width: 110px;
+  min-height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,7 +49,7 @@ const Button = forwardRef<HTMLButtonElement, IPropsButton>(
           </ButtonFill>
         );
       case "transparent":
-        return <ButtonTransparent ref={ref} {...props}>{children}</ButtonTransparent>;
+        return <ButtonTransparent ref={ref} {...props}>{children}</ButtonTransparent>
       default:
         const a: never = variant;
         return <></>;

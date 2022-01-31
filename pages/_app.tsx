@@ -1,6 +1,5 @@
 import { Provider } from "mobx-react";
 import type { AppProps } from "next/app";
-import App from "next/app";
 import { useRouter } from "next/router";
 import { createGlobalStyle } from "styled-components";
 import Layout from "../layout";
@@ -36,47 +35,21 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-// const MyApp = ({ Component, pageProps }: AppProps) => {
-//   const { pathname } = useRouter();
+const MyApp = ({ Component, pageProps }: AppProps) => {
+  const { pathname } = useRouter();
 
-//   const store = {
-//     userStore: new UserStore()
-//   }
-
-//   return (
-//     <Provider store={store}>
-//       <GlobalStyle />
-//       <Layout.Default path={pathname as typesPath}>
-//         <Component {...pageProps} />
-//       </Layout.Default>
-//     </Provider>
-//   );
-// };
-
-class MyApp extends App {
-  state = {
-    userStore: new UserStore(),
-  };
-
-  static getDerivedStateFromProps(
-    props: { initialStoreState: any },
-    state: { userStore: { hydrate: (arg0: any) => void } }
-  ) {
-    state.userStore.hydrate(props.initialStoreState);
-    return state;
+  const store = {
+    userStore: new UserStore()
   }
 
-  render() {
-    const { Component, pageProps } = this.props;
-    return (
-      <Provider userStore={this.state.userStore}>
-        <GlobalStyle />
-        {/* <Layout.Default path={pathname as typesPath}> */}
+  return (
+    <Provider store={store}>
+      <GlobalStyle />
+      <Layout.Default path={pathname as typesPath}>
         <Component {...pageProps} />
-        {/* </Layout.Default> */}
-      </Provider>
-    );
-  }
-}
+      </Layout.Default>
+    </Provider>
+  );
+};
 
 export default MyApp;

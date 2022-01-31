@@ -31,7 +31,7 @@ class UserStore {
     makePersistable(this, {
       name: "user",
       properties: ["user"],
-      storage:  typeof window === "undefined" ? undefined : window.localStorage,
+      storage: typeof window === "undefined" ? undefined : window.localStorage,
     });
   }
 
@@ -52,13 +52,11 @@ class UserStore {
     this.loading = true;
     sendsay
       .request({ action: "login", ...data })
-      .then((res: any) => {
+      .then((res: IUserState) => {
         this.signInSuccess(res);
       })
       .catch((e: IError) => {
-        runInAction(() => {
-          this.error = e;
-        });
+        this.signInFailer(e);
       });
   }
 
@@ -66,6 +64,11 @@ class UserStore {
     document.cookie = `sendsay_ssesion=${sendsay.session}`;
     this.user.login = res.login;
     this.user.sublogin = res.sublogin;
+    this.loading = false;
+  }
+
+  signInFailer(e: IError) {
+    this.error = e;
     this.loading = false;
   }
 
@@ -97,6 +100,5 @@ class UserStore {
       });
   }
 }
-
 
 export default UserStore;

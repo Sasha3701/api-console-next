@@ -27,7 +27,7 @@ const Spinner = styled.div`
 `;
 
 const Loader = (): JSX.Element => {
-  return <Spinner></Spinner>;
+  return <Spinner></Spinner>
 };
 
 export default Loader;

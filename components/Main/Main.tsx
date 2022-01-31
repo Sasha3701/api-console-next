@@ -15,9 +15,9 @@ const MainAuth = styled.main`
 const Main = ({ children, variant }: IPropsMain): JSX.Element => {
   switch (variant) {
     case "auth":
-      return <MainAuth>{children}</MainAuth>;
+      return <MainAuth>{children}</MainAuth>
     case "console":
-      return <MainConsole>{children}</MainConsole>;
+      return <MainConsole>{children}</MainConsole>
     default:
       const a: never = variant;
       return <></>;

@@ -10,7 +10,7 @@ const CustomTitle = styled.h1<ITitle>`
 `;
 
 const Title = forwardRef<HTMLHeadingElement, IPropsTitle>(({ children, variant, ...props }, ref): JSX.Element => {
-  return <CustomTitle variant={variant} ref={ref} {...props}>{children}</CustomTitle>;
+  return <CustomTitle variant={variant} ref={ref} {...props}>{children}</CustomTitle>
 });
 
 export default Title;

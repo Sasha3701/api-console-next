@@ -1,3 +1,5 @@
+import UserStore from "../store/userStore";
+
 export type typesPath = "/" | "/auth";
 
 export type nullableTypes<T> = T | null;
@@ -17,3 +19,9 @@ export interface IError {
   id: string;
   explain: string;
 }
+
+export type StoreProps = {
+  store: {
+    userStore?: UserStore;
+  };
+};

@@ -12,7 +12,7 @@ const CustomLogo = styled(LogoIcon)`
 `;
 
 const Logo = (): JSX.Element => {
-  return <CustomLogo />;
+  return <CustomLogo />
 };
 
 export default Logo;

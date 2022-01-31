@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Logo } from "..";
 import { CONTENT } from "../../content";
 import AuthForm from "../AuthForm";
+import Logo from "../Logo";
 import Main from "../Main/Main";
 import Title from "../Title/Title";
 

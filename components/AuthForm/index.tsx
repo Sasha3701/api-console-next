@@ -1,13 +1,10 @@
 import { Form, Formik } from "formik";
-import { useCallback, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CONTENT } from "../../content";
-import { IUser } from "../../models";
+import { IUser, StoreProps } from "../../models";
 import { inject, Observer, observer } from "mobx-react";
 import { AuthSchema } from "../../utils/Schemes";
 import { Button, Input } from "../UI";
-import UserStore from "../../store/userStore";
-import Loader from "../Loader";
 
 const CustomForm = styled(Form)`
   width: 100%;
@@ -20,17 +17,11 @@ const initialState: IUser = {
   passwd: "",
 };
 
-type Props = {
-  userStore?: UserStore;
-};
-
-const AuthForm = inject("userStore")(
-  observer((props: Props): JSX.Element => {
-    const userStore = props.userStore!;
+const AuthForm = inject("store")(
+  observer((props: StoreProps): JSX.Element => {
+    const userStore = props.store.userStore!;
 
     return (
-      <>
-      <div>{userStore.user.login}</div>
       <Formik
         initialValues={initialState}
         validationSchema={AuthSchema}
@@ -38,13 +29,7 @@ const AuthForm = inject("userStore")(
           userStore.signInRequest(values);
         }}
       >
-        {({
-          handleChange,
-          handleBlur,
-          errors,
-          touched,
-          isValid,
-        }) => (
+        {({ handleChange, handleBlur, errors, touched, isValid }) => (
           <Observer>
             {() => (
               <CustomForm>
@@ -86,7 +71,6 @@ const AuthForm = inject("userStore")(
           </Observer>
         )}
       </Formik>
-      </>
     );
   })
 );

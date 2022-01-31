@@ -307,15 +307,6 @@
     "@babel/helper-plugin-utils" "^7.16.7"
     "@babel/plugin-syntax-class-static-block" "^7.14.5"
 
-"@babel/plugin-proposal-decorators@^7.16.7":
-  version "7.16.7"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-decorators/-/plugin-proposal-decorators-7.16.7.tgz#922907d2e3e327f5b07d2246bcfc0bd438f360d2"
-  integrity sha512-DoEpnuXK14XV9btI1k8tzNGCutMclpj4yru8aXKoHlVmbO1s+2A+g2+h4JhcjrxkFJqzbymnLG6j/niOf3iFXQ==
-  dependencies:
-    "@babel/helper-create-class-features-plugin" "^7.16.7"
-    "@babel/helper-plugin-utils" "^7.16.7"
-    "@babel/plugin-syntax-decorators" "^7.16.7"
-
 "@babel/plugin-proposal-dynamic-import@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/plugin-proposal-dynamic-import/-/plugin-proposal-dynamic-import-7.16.7.tgz#c19c897eaa46b27634a00fee9fb7d829158704b2"
@@ -438,13 +429,6 @@
   integrity sha512-b+YyPmr6ldyNnM6sqYeMWE+bgJcJpO6yS4QD7ymxgH34GBPNDM/THBh8iunyvKIZztiwLH4CJZ0RxTk9emgpjw==
   dependencies:
     "@babel/helper-plugin-utils" "^7.14.5"
-
-"@babel/plugin-syntax-decorators@^7.16.7":
-  version "7.16.7"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-decorators/-/plugin-syntax-decorators-7.16.7.tgz#f66a0199f16de7c1ef5192160ccf5d069739e3d3"
-  integrity sha512-vQ+PxL+srA7g6Rx6I1e15m55gftknl2X8GCUW1JTlkTaXZLJOS0UcaY0eK9jYT7IYf4awn6qwyghVHLDz1WyMw==
-  dependencies:
-    "@babel/helper-plugin-utils" "^7.16.7"
 
 "@babel/plugin-syntax-dynamic-import@^7.8.3":
   version "7.8.3"
@@ -2613,18 +2597,6 @@ mobx-persist-store@^1.0.4:
   resolved "https://registry.yarnpkg.com/mobx-persist-store/-/mobx-persist-store-1.0.4.tgz#233f0c03a708c0f58948c5ff223aa59610a2711a"
   integrity sha512-zxYvRSGKIJG/2brJC8+u6rJOnhe6HvvIOSaPSoOKdRFw4R91EV+e8PsraiScH3STNkGQlArbjnAUpd7cga1VCA==
 
-mobx-persist@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/mobx-persist/-/mobx-persist-0.4.1.tgz#fe5790eda04e0ee0b91c512d1347104e09363f9a"
-  integrity sha512-cPxVuZTY5neesxOV/Z25SF4+/NbC6wfHOe9HT5XoSEkAALNxNE41yDK48peJQ3iK14m0G2ywQRklCXeV3wftnQ==
-  dependencies:
-    serializr "^1.1.11"
-
-mobx-react-devtools@^6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/mobx-react-devtools/-/mobx-react-devtools-6.1.1.tgz#a462b944085cf11ff96fc937d12bf31dab4c8984"
-  integrity sha512-nc5IXLdEUFLn3wZal65KF3/JFEFd+mbH4KTz/IG5BOPyw7jo8z29w/8qm7+wiCyqVfUIgJ1gL4+HVKmcXIOgqA==
-
 mobx-react-lite@^3.2.0:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-3.2.3.tgz#83d2b32ebf4383cd0dc0d397acbf53a8e9c66765"
@@ -3063,11 +3035,6 @@ sendsay-api@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/sendsay-api/-/sendsay-api-2.4.0.tgz#7dbadfeab8b3878c8a6dd0df08a2c6a11bed7497"
   integrity sha512-4xZV9M7MVM/jllWA4IdU+N0+LnkcQqBPS3GO/kf53c2gSsSq/Bv14KkZQ2F02ORQyo3/3W/FrpQEsCPxDdfLoQ==
-
-serializr@^1.1.11:
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/serializr/-/serializr-1.5.4.tgz#3ddf1cb7b4465c9c3f72bab0cbc41e09dbe50c33"
-  integrity sha512-ImLlkNfNSSv9d7Ah1j/yrPk1FHbRC1zkD7URcgx/8M1eYHGUxGf/Ig/d8ML04ifqN7QesyYKsfLYA4xjAVAR/g==
 
 shallowequal@^1.1.0:
   version "1.1.0"
