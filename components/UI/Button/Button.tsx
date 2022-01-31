@@ -39,11 +39,11 @@ const ButtonTransparent = styled.button`
 `;
 
 const Button = forwardRef<HTMLButtonElement, IPropsButton>(
-  ({ variant = "fill", loading = false, children, ...props }, ref): JSX.Element => {
+  ({ variant = "fill", loading = false, children, disabled, ...props }, ref): JSX.Element => {
     switch (variant) {
       case "fill":
         return (
-          <ButtonFill ref={ref} disabled={loading} {...props}>
+          <ButtonFill ref={ref} {...props} disabled={disabled || loading}>
             {loading ? <Loader /> : children}
           </ButtonFill>
         );

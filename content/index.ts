@@ -12,7 +12,7 @@ export const CONTENT = {
         LABEL: 'Сублогин',
       },
       PASSWORD: {
-        NAME: 'password',
+        NAME: 'passwd',
         LABEL: 'Пароль',
       },
     },
