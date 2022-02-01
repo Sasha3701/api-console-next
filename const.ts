@@ -1,6 +1,7 @@
 export const PATHS = {
   console: "/",
   auth: "/auth",
+  history: "/history",
 };
 
 export const REGX = {

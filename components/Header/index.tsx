@@ -10,10 +10,13 @@ import { CONTENT } from "../../content";
 import Logo from "../Logo";
 import UserStore, { UserStoreContext } from "../../store/userStore";
 import { observer } from "mobx-react";
+import Link from "../UI/Link/Link";
+import { useRouter } from "next/router";
+import { typesPath } from "../../models";
 
 const CustomHeader = styled.header`
   display: grid;
-  grid-template-columns: auto auto 1fr auto auto auto;
+  grid-template-columns: auto auto 1fr auto auto auto auto;
   align-items: center;
   padding: 10px 15px;
   background-color: var(--color-primary);
@@ -36,9 +39,11 @@ const Header = observer((): JSX.Element => {
     return !!document.fullscreenElement;
   });
 
+  const { pathname } = useRouter()
+
   const handleLogout = useCallback(() => {
     userStore.logoutRequest();
-  }, []);
+  }, [userStore]);
 
   const handleChangeScreen = useCallback(() => {
     if (typeof document === "undefined") {
@@ -59,6 +64,7 @@ const Header = observer((): JSX.Element => {
         {CONTENT.HEADER.TITLE}
       </Title>
       <EmptyBox></EmptyBox>
+      <Link path={pathname as typesPath} style={{ marginRight: "20px" }}/>
       <Account
         style={{ marginRight: "30px" }}
         login={userStore.user.login}

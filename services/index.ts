@@ -19,6 +19,7 @@ export const addHistory = (
       status,
       title: requestObj.action,
       request: formatJson(state.value),
+      date: Date.now()
     };
     return state.console.history.length >= MAX_HISTORY
       ? [

@@ -28,12 +28,14 @@ class ConsoleStore {
         request: '{\n  "action": "sys.settings.get"\n}',
         status: true,
         title: "sys.settings.get",
+        date: 1643754864879,
       },
       {
         id: "2",
         request: '{\n  "action": "pong"\n}',
         status: true,
         title: "pong",
+        date: 1643754864872,
       },
     ],
   };
@@ -69,12 +71,14 @@ class ConsoleStore {
                 request: '{\n  "action": "sys.settings.get"\n}',
                 status: true,
                 title: "sys.settings.get",
+                date: 1643754864879,
               },
               {
                 id: "2",
                 request: '{\n  "action": "pong"\n}',
                 status: true,
                 title: "pong",
+                date: 1643754864872,
               },
             ],
           };
@@ -117,7 +121,7 @@ class ConsoleStore {
 
   consoleFailer(e: IError) {
     const result: string = formatJson(e as Record<string, any>);
-    this.console.history = addHistory(this, true);
+    this.console.history = addHistory(this, false);
     this.valueResponse = result;
     this.errorResponse = true;
     this.loadingConsole = false;
@@ -135,7 +139,7 @@ class ConsoleStore {
   }
 
   consoleErrorRequest(status: boolean) {
-    this.errorRequest = status
+    this.errorRequest = status;
   }
 }
 

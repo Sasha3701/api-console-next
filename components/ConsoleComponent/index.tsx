@@ -15,8 +15,6 @@ const Wrapper = styled.div`
 
 const ConsoleComponent = (): JSX.Element => {
 
-  const handleChange = useCallback(() => {}, []);
-
   return (
     <Wrapper>
       <Header />
