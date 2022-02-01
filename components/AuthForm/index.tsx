@@ -19,7 +19,7 @@ const initialState: IUser = {
 
 const AuthForm = inject("store")(
   observer((props: StoreProps): JSX.Element => {
-    const userStore = props.store.userStore!;
+    const userStore = props.store!.userStore!;
 
     return (
       <Formik

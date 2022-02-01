@@ -1,6 +1,6 @@
 import { configure, makeAutoObservable, runInAction } from "mobx";
 import { enableStaticRendering } from "mobx-react";
-import { makePersistable } from "mobx-persist-store";
+import { makePersistable, stopPersisting } from "mobx-persist-store";
 import { IError, IUser, nullableTypes } from "../models";
 import sendsay from "../api";
 import { getCookie } from "../utils";
@@ -42,22 +42,24 @@ class UserStore {
     return null;
   }
 
+  stopStore() {
+    stopPersisting(this);
+  }
+
   hydrate(data: IUserState) {
     this.user = data != null ? data : { login: null, sublogin: null };
   }
 
-  signInRequest(data: IUser) {
+  async signInRequest(data: IUser) {
     this.user.login = null;
     this.user.sublogin = null;
     this.loading = true;
-    sendsay
-      .request({ action: "login", ...data })
-      .then((res: IUserState) => {
-        this.signInSuccess(res);
-      })
-      .catch((e: IError) => {
-        this.signInFailer(e);
-      });
+    try {
+      const res: IUserState = await sendsay.request({ action: "login", ...data })
+      this.signInSuccess(res);
+    } catch(e) {
+      this.signInFailer(e as IError);
+    }
   }
 
   signInSuccess(res: IUserState) {
@@ -68,7 +70,8 @@ class UserStore {
   }
 
   signInFailer(e: IError) {
-    this.error = e;
+    this.error.id = e.id;
+    this.error.explain = e.explain;
     this.loading = false;
   }
 

@@ -21,7 +21,7 @@ export interface IError {
 }
 
 export type StoreProps = {
-  store: {
+  store?: {
     userStore?: UserStore;
   };
 };
