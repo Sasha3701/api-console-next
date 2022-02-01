@@ -28,7 +28,7 @@ const CustomSvg = styled(LogoutIcon)`
 const EmptyBox = styled.div``;
 
 const Header = observer((): JSX.Element => {
-  const { user } = useContext(UserStoreContext) as UserStore;
+  const userStore = useContext(UserStoreContext) as UserStore;
   const [fullscreen, setFullscreen] = useState<boolean>(() => {
     if (typeof document === "undefined") {
       return false;
@@ -36,7 +36,9 @@ const Header = observer((): JSX.Element => {
     return !!document.fullscreenElement;
   });
 
-  const logout = useCallback(() => {}, []);
+  const handleLogout = useCallback(() => {
+    userStore.logoutRequest();
+  }, []);
 
   const handleChangeScreen = useCallback(() => {
     if (typeof document === "undefined") {
@@ -59,11 +61,11 @@ const Header = observer((): JSX.Element => {
       <EmptyBox></EmptyBox>
       <Account
         style={{ marginRight: "30px" }}
-        login={user.login}
-        sublogin={user.sublogin}
+        login={userStore.user.login}
+        sublogin={userStore.user.sublogin}
       />
       <Button
-        onClick={logout}
+        onClick={handleLogout}
         style={{ marginRight: "20px" }}
         variant="transparent"
       >

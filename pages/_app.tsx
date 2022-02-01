@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { createGlobalStyle } from "styled-components";
 import Layout from "../layout";
 import { typesPath } from "../models";
+import ConsoleStore, { ConsoleStoreContext } from "../store/consoleStore";
 import UserStore, { UserStoreContext } from "../store/userStore";
 
 const GlobalStyle = createGlobalStyle`
@@ -38,12 +39,14 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   const { pathname } = useRouter();
 
   return (
-    <UserStoreContext.Provider value={new UserStore()}>
-      <GlobalStyle />
-      <Layout.Default path={pathname as typesPath}>
-        <Component {...pageProps} />
-      </Layout.Default>
-    </UserStoreContext.Provider>
+    <ConsoleStoreContext.Provider value={new ConsoleStore()}>
+      <UserStoreContext.Provider value={new UserStore()}>
+        <GlobalStyle />
+        <Layout.Default path={pathname as typesPath}>
+          <Component {...pageProps} />
+        </Layout.Default>
+      </UserStoreContext.Provider>
+    </ConsoleStoreContext.Provider>
   );
 };
 

@@ -1,6 +1,8 @@
-import { useCallback, useRef } from "react";
+import { observer } from "mobx-react";
+import { useCallback, useContext, useRef } from "react";
 import styled from "styled-components";
 import ClearIcon from "../../public/clear.svg";
+import { ConsoleStoreContext } from "../../store/consoleStore";
 import { Button, Dropdown } from "../UI";
 
 const Container = styled.div`
@@ -16,6 +18,8 @@ const ListRequests = styled.ul`
   list-style: none;
   margin: 0;
   padding: 10px 15px;
+  box-sizing: border-box;
+  height: 100%;
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
@@ -27,6 +31,8 @@ const ListRequests = styled.ul`
 
 const Item = styled.li`
   margin-right: 10px;
+  height: max-content;
+  box-sizing: border-box;
   &:last-child {
     margin-right: 0;
   }
@@ -40,8 +46,9 @@ const Border = styled.div`
   box-sizing: border-box;
 `;
 
-const History = (): JSX.Element => {
+const History = observer((): JSX.Element => {
   const refList = useRef<HTMLUListElement>(null);
+  const consoleStore = useContext(ConsoleStoreContext)
 
   const handleClearHistory = useCallback(() => {}, []);
 
@@ -55,10 +62,10 @@ const History = (): JSX.Element => {
 
   return (
     <Container>
-      {/* {history.length !== 0 ? (
+      {consoleStore?.console.history.length !== 0 ? (
         <>
           <ListRequests ref={refList} onWheel={handleWheel}>
-            {history.map(({title, id, request, status}) => (
+            {consoleStore?.console.history.map(({title, id, request, status}) => (
               <Item key={id}>
                 <Dropdown key={id} id={id} title={title} request={request} status={status} />
               </Item>
@@ -67,15 +74,15 @@ const History = (): JSX.Element => {
           <Border></Border>
           <Button
             onClick={handleClearHistory}
-            style={{ margin: "15px" }}
+            style={{ margin: "6px" }}
             variant="transparent"
           >
             <ClearIcon />
           </Button>
         </>
-      ) : null} */}
+      ) : null}
     </Container>
   );
-};
+});
 
 export default History;

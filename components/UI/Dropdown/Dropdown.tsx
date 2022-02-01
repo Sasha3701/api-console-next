@@ -13,12 +13,13 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: max-content;
-  background-color: var(--color-white);
+  background-color: var(--text-colot-white);
   box-sizing: border-box;
   border-radius: 5px;
-  box-shadow: 0px 1px 2px var(--color-shadow);
+  transition: all 0.3s;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
   &:hover {
-    box-shadow: 0px 1px 4px var(--color-shadow-1);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   }
 `;
 
@@ -27,7 +28,7 @@ const StatusRequest = styled.span<IStatusRequest>`
   height: 10px;
   width: 10px;
   box-sizing: border-box;
-  background-color: ${({statusRequest}): string => (statusRequest ? 'var(--color-green)' : 'var(--color-error)')};
+  background-color: ${({statusRequest}): string => (statusRequest ? 'var(--color-green)' : 'var(--color-red)')};
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   margin-right: 5px;
@@ -45,14 +46,14 @@ const CustomButtonWithImg = styled.button`
 `;
 
 const CustomButton = styled(Button)`
-  padding: 5px 10px 5px 0px;
+  padding: 5px 10px 5px 5px;
   & svg {
-    fill: var(--color-gray);
+    fill: var(--color-gray-light);
   }
   &:hover {
     & svg {
       stroke: none;
-      fill: var(--color-gray-2);
+      fill: var(--color-gray);
     }
   }
   &:focus {
@@ -65,8 +66,8 @@ const CustomButton = styled(Button)`
 
 const ListAction = styled.ul`
   list-style: none;
-  background-color: var(--color-white);
-  box-shadow: 0px 1px 4px var(--color-shadow-1);
+  background-color: var(--text-colot-white);
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 3px;
   margin: 0px 0px 0px 0px;
   padding: 5px 0;
@@ -74,14 +75,14 @@ const ListAction = styled.ul`
 
 const ItemList = styled.li`
   &:last-child {
-    border-top: 1px solid var(--color-gray);
+    border-top: 1px solid var(--color-gray-light);
     margin-top: 5px;
   }
   &:hover {
-    color: var(--color-white);
-    background-color: var(--color-blue-1);
+    color: var(--text-colot-white);
+    background-color: var(--color-blue);
     &:last-child {
-      background-color: var(--color-error);
+      background-color: var(--color-red);
     }
   }
 `;
@@ -105,7 +106,7 @@ const AlertCopy = styled.div`
   top: 5px;
   left: 27px;
   z-index: 1000;
-  background-color: var(--color-gray-4);
+  background-color: var(--color-gray);
 `;
 
 const Dropdown = (props: IHistory): JSX.Element => {
@@ -180,7 +181,7 @@ const Dropdown = (props: IHistory): JSX.Element => {
                 <StatusRequest statusRequest={props.status} />
                 {props.title}
               </CustomButtonWithImg>
-              <CustomButton theme="transparent" onClick={dropdownToggle} ref={(node) => setButtonRef(node, ref)}>
+              <CustomButton variant="transparent" onClick={dropdownToggle} ref={(node) => setButtonRef(node, ref)}>
                 <MenuIcon />
               </CustomButton>
             </Container>

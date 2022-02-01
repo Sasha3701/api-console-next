@@ -24,13 +24,13 @@ const Container = styled.div`
 `;
 
 const AuthComponent = observer((): JSX.Element => {
-  const userStore = useContext(UserStoreContext) as UserStore
+  const userStore = useContext(UserStoreContext) as UserStore;
 
   useEffect(() => {
-    if(userStore.user.login) {
-      Router.push(PATHS.console)
+    if (userStore.user.login && userStore.user.sessionKey) {
+      Router.push(PATHS.console);
     }
-  }, [userStore.user.login])
+  }, [userStore.user.login, userStore.user.sessionKey]);
 
   return (
     <Main variant="auth">

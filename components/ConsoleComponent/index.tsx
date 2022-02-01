@@ -1,11 +1,11 @@
-import Main from '../Main/Main'
+import Main from "../Main/Main";
 import { useCallback, useEffect } from "react";
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
 import Header from "../Header";
-import Console from '../Console/Console';
-import { MIN_WIDTH_TEXTAREA } from '../../const';
-import History from '../History/History';
+import Console from "../Console/Console";
+import { MIN_WIDTH_TEXTAREA } from "../../const";
+import History from "../History/History";
 
 const Wrapper = styled.div`
   display: grid;
@@ -21,15 +21,11 @@ const ConsoleComponent = (): JSX.Element => {
   return (
     <Wrapper>
       <Header />
-      <Main variant='console'>
+      <Main variant="console">
         <History />
-        <Console
-          errorInput={false}
-          handleChange={handleChange}
-          minWidth={MIN_WIDTH_TEXTAREA}
-        />
+        <Console handleChange={handleChange} minWidth={MIN_WIDTH_TEXTAREA} />
       </Main>
-      <Footer error={false} />
+      <Footer />
     </Wrapper>
   );
 };

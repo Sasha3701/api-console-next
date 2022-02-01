@@ -1,4 +1,4 @@
-import { configure, makeAutoObservable, runInAction } from "mobx";
+import { configure, makeAutoObservable } from "mobx";
 import { enableStaticRendering } from "mobx-react";
 import { makePersistable, stopPersisting } from "mobx-persist-store";
 import { IError, IUser, nullableTypes } from "../models";
@@ -15,12 +15,20 @@ enableStaticRendering(isServer);
 export interface IUserState {
   login: nullableTypes<string>;
   sublogin: nullableTypes<string>;
+  sessionKey: nullableTypes<string>;
+}
+
+export interface IUserResponse {
+  login: nullableTypes<string>;
+  sublogin: nullableTypes<string>;
+  session: nullableTypes<string>;
 }
 
 class UserStore {
   user: IUserState = {
     login: null,
     sublogin: null,
+    sessionKey: null,
   };
   error: IError = {
     id: "",
@@ -49,7 +57,8 @@ class UserStore {
   }
 
   hydrate(data: IUserState) {
-    this.user = data != null ? data : { login: null, sublogin: null };
+    this.user =
+      data != null ? data : { login: null, sublogin: null, sessionKey: null };
   }
 
   async signInRequest(data: IUser) {
@@ -57,19 +66,23 @@ class UserStore {
     this.user.sublogin = null;
     this.loading = true;
     try {
-      const res: IUserState = await sendsay.request({ action: "login", ...data })
+      const res: IUserResponse = await sendsay.request({
+        action: "login",
+        ...data,
+      });
       this.signInSuccess(res);
-    } catch(e) {
+    } catch (e) {
       this.signInFailer(e as IError);
     }
   }
 
-  signInSuccess(res: IUserState) {
+  signInSuccess(res: IUserResponse) {
     document.cookie = `${KEY_COOKIE}=${sendsay.session}`;
     this.user.login = res.login;
     this.user.sublogin = res.sublogin;
-    this.error.id = '';
-    this.error.explain = '';
+    this.user.sessionKey = res.session;
+    this.error.id = "";
+    this.error.explain = "";
     this.loading = false;
   }
 
@@ -79,6 +92,33 @@ class UserStore {
     this.loading = false;
   }
 
+  logoutRequest() {
+    sendsay
+      .request({
+        action: "logout",
+        session: getCookie(KEY_COOKIE),
+      })
+      .then(() => {
+        this.logoutSuccess()
+      })
+      .catch((e: IError) => {
+        console.log(e)
+        this.logoutFailer(e)
+      });
+  }
+
+  logoutSuccess() {
+    document.cookie = "";
+    this.user.login = null;
+    this.user.sublogin = null;
+    this.user.sessionKey = null;
+  }
+
+  logoutFailer(e: IError) {
+    this.error.id = e.id;
+    this.error.explain = e.explain;
+  }
+
   check() {
     sendsay
       .request({
@@ -86,24 +126,7 @@ class UserStore {
         session: getCookie(KEY_COOKIE),
       })
       .catch(() => {
-        this.logout();
-      });
-  }
-
-  logout() {
-    sendsay
-      .request({
-        action: "logout",
-      })
-      .then(() => {
-        document.cookie = "";
-        this.user.login = null;
-        this.user.sublogin = null;
-      })
-      .catch((e: IError) => {
-        runInAction(() => {
-          this.error = e;
-        });
+        this.logoutRequest();
       });
   }
 }

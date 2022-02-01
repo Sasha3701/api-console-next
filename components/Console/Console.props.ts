@@ -9,6 +9,5 @@ export interface IWrapperConsole extends DetailedHTMLProps<HTMLAttributes<HTMLDi
 export interface IPropsConsole {
   padSide?: number;
   minWidth?: number;
-  errorInput: boolean;
   handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }
