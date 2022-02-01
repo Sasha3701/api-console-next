@@ -23,13 +23,21 @@ const Footer = observer((): JSX.Element => {
 
   const consoleStore = useContext(ConsoleStoreContext)
 
-  const handleSend = useCallback(() => {}, []);
+  const handleSend = useCallback(() => {
+    if (!consoleStore?.value) {
+      consoleStore?.consoleErrorRequest(true)
+      return;
+    }
+    consoleStore?.consoleRequest(consoleStore.value)
+  }, [consoleStore]);
 
-  const handleFormat = useCallback(() => {}, []);
+  const handleFormat = useCallback(() => {
+    consoleStore?.consoleFormat(consoleStore.value)
+  }, [consoleStore]);
 
   return (
     <CustomFooter>
-      <Button onClick={handleSend} disabled={consoleStore?.errorRequest}>
+      <Button onClick={handleSend} loading={consoleStore?.loadingConsole} disabled={consoleStore?.errorRequest}>
         {CONTENT.FOOTER.BUTTON.SEND}
       </Button>
       <Button onClick={handleFormat} variant="transparent" loading={consoleStore?.loadingConsole}>

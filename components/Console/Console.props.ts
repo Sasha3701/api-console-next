@@ -1,4 +1,4 @@
-import {ChangeEvent, DetailedHTMLProps, HTMLAttributes} from 'react';
+import {DetailedHTMLProps, HTMLAttributes} from 'react';
 import {nullableTypes} from '../../models';
 
 export interface IWrapperConsole extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
@@ -9,5 +9,4 @@ export interface IWrapperConsole extends DetailedHTMLProps<HTMLAttributes<HTMLDi
 export interface IPropsConsole {
   padSide?: number;
   minWidth?: number;
-  handleChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 }

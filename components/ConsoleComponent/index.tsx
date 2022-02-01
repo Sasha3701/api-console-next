@@ -14,7 +14,6 @@ const Wrapper = styled.div`
 `;
 
 const ConsoleComponent = (): JSX.Element => {
-  useEffect(() => {}, []);
 
   const handleChange = useCallback(() => {}, []);
 
@@ -23,7 +22,7 @@ const ConsoleComponent = (): JSX.Element => {
       <Header />
       <Main variant="console">
         <History />
-        <Console handleChange={handleChange} minWidth={MIN_WIDTH_TEXTAREA} />
+        <Console minWidth={MIN_WIDTH_TEXTAREA} />
       </Main>
       <Footer />
     </Wrapper>

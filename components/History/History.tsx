@@ -50,7 +50,9 @@ const History = observer((): JSX.Element => {
   const refList = useRef<HTMLUListElement>(null);
   const consoleStore = useContext(ConsoleStoreContext)
 
-  const handleClearHistory = useCallback(() => {}, []);
+  const handleClearHistory = useCallback(() => {
+    consoleStore?.clearHistory()
+  }, [consoleStore]);
 
   const handleWheel = useCallback((event) => {
     event.preventDefault();

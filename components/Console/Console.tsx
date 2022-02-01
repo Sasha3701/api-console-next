@@ -24,13 +24,16 @@ const Console = observer(
   ({
     padSide = 15,
     minWidth = 100,
-    handleChange,
   }: IPropsConsole): JSX.Element => {
     const refIn = useRef<HTMLTextAreaElement>(null);
     const refOut = useRef<HTMLTextAreaElement>(null);
     const refDrag = useRef<HTMLDivElement>(null);
 
     const consoleStore = useContext(ConsoleStoreContext)
+
+    const handleChange = useCallback((e) => {
+      consoleStore?.changeConsole(e.target.value)
+    }, [consoleStore])
 
     const handleDrag = useCallback(
       (e) => {
@@ -48,9 +51,9 @@ const Console = observer(
           return;
         }
         const size = posXCursor - refIn.current?.offsetLeft!;
-        //
+        consoleStore?.changeSize(size)
       },
-      [minWidth, padSide]
+      [consoleStore, minWidth, padSide]
     );
 
     const handleChangeDragDown = useCallback(() => {

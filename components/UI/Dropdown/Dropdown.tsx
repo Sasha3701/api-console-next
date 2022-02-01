@@ -1,11 +1,22 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import {Manager, Reference, Popper} from 'react-popper';
-import {useState, useRef, useCallback} from 'react';
+import {useState, useRef, useCallback, useContext} from 'react';
 import {IStatusRequest} from './Dropdown.props';
 import {Button} from '..';
 import MenuIcon from "../../../public/drag.svg";
 import {CONTENT} from '../../../content';
 import { IHistory } from '../../../models';
+import { observer } from 'mobx-react';
+import { ConsoleStoreContext } from '../../../store/consoleStore';
+
+const animAlert= keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    position: 1;
+  }
+`
 
 const Container = styled.div`
   display: flex;
@@ -106,10 +117,15 @@ const AlertCopy = styled.div`
   top: 5px;
   left: 27px;
   z-index: 1000;
-  background-color: var(--color-gray);
+  border-radius: 5px;
+  line-height: 20px;
+  font-size: 12px;
+  background-color: var(--color-primary);
+  animation: ${animAlert} 0.5s alternate;
 `;
 
-const Dropdown = (props: IHistory): JSX.Element => {
+const Dropdown = observer((props: IHistory): JSX.Element => {
+  const consoleStore = useContext(ConsoleStoreContext)
   const [dropdownOpen, setDropdownToggle] = useState(false);
   const dropdownListRef = useRef(null);
   const dropdownButtonRef = useRef(null);
@@ -135,15 +151,19 @@ const Dropdown = (props: IHistory): JSX.Element => {
   }, []);
 
   const handleClickHistory = useCallback(() => {
-  }, []);
+    consoleStore?.changeConsole(props.request)
+  }, [consoleStore, props.request]);
 
   const handleDelete = useCallback(() => {
+    consoleStore?.deleteItemHistory(props.id)
     dropdownToggle();
-  }, []);
+  }, [consoleStore, dropdownToggle, props.id]);
 
   const handleExecute = useCallback(() => {
-    dropdownToggle();
-  }, []);
+    consoleStore?.changeConsole(props.request)
+    consoleStore?.consoleRequest(props.request)
+    dropdownToggle(); 
+  }, [consoleStore, dropdownToggle, props.request]);
 
   const handleCopy = useCallback(() => {
     navigator.clipboard.writeText(props.request);
@@ -207,6 +227,6 @@ const Dropdown = (props: IHistory): JSX.Element => {
       </div>
     </Manager>
   );
-};
+});
 
 export default Dropdown;

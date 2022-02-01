@@ -77,7 +77,7 @@ class UserStore {
   }
 
   signInSuccess(res: IUserResponse) {
-    document.cookie = `${KEY_COOKIE}=${sendsay.session}`;
+    document.cookie = `${KEY_COOKIE}=${res.session}`;
     this.user.login = res.login;
     this.user.sublogin = res.sublogin;
     this.user.sessionKey = res.session;
