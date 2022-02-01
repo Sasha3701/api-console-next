@@ -66,6 +66,8 @@ class UserStore {
     document.cookie = `sendsay_ssesion=${sendsay.session}`;
     this.user.login = res.login;
     this.user.sublogin = res.sublogin;
+    this.error.id = '';
+    this.error.explain = '';
     this.loading = false;
   }
 

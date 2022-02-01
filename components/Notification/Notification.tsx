@@ -36,24 +36,19 @@ const Smile = styled(ErrorSmile)`
   left: 10px;
 `;
 
-const Notification = inject("store")(
-  observer(
-    forwardRef<HTMLDivElement, IPropsNotification>(
-      ({ store, ...props }, ref): JSX.Element => {
-        const userStore = store!.userStore!;
-        if (!userStore.errorMessage) {
-          return <></>;
-        }
-        return (
-          <Container ref={ref} {...props}>
-            <Smile />
-            <Title>{CONTENT.NOTIFICATION.TITLE}</Title>
-            <Description>{userStore.errorMessage}</Description>
-          </Container>
-        );
-      }
-    )
-  )
+const Notification = forwardRef<HTMLDivElement, IPropsNotification>(
+  ({ errorMessage, ...props }, ref): JSX.Element => {
+    if (!errorMessage) {
+      return <></>;
+    }
+    return (
+      <Container ref={ref} {...props}>
+        <Smile />
+        <Title>{CONTENT.NOTIFICATION.TITLE}</Title>
+        <Description>{errorMessage}</Description>
+      </Container>
+    );
+  }
 );
 
 export default memo(Notification);
