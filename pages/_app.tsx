@@ -1,10 +1,9 @@
-import { Provider } from "mobx-react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { createGlobalStyle } from "styled-components";
 import Layout from "../layout";
 import { typesPath } from "../models";
-import UserStore from "../store/userStore";
+import UserStore, { UserStoreContext } from "../store/userStore";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -38,17 +37,13 @@ const GlobalStyle = createGlobalStyle`
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const { pathname } = useRouter();
 
-  const store = {
-    userStore: new UserStore()
-  }
-
   return (
-    <Provider store={store}>
+    <UserStoreContext.Provider value={new UserStore()}>
       <GlobalStyle />
       <Layout.Default path={pathname as typesPath}>
         <Component {...pageProps} />
       </Layout.Default>
-    </Provider>
+    </UserStoreContext.Provider>
   );
 };
 

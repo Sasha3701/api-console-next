@@ -4,6 +4,8 @@ import { makePersistable, stopPersisting } from "mobx-persist-store";
 import { IError, IUser, nullableTypes } from "../models";
 import sendsay from "../api";
 import { getCookie } from "../utils";
+import { KEY_COOKIE } from "../const";
+import { createContext } from "react";
 
 configure({ enforceActions: "observed" });
 
@@ -63,7 +65,7 @@ class UserStore {
   }
 
   signInSuccess(res: IUserState) {
-    document.cookie = `sendsay_ssesion=${sendsay.session}`;
+    document.cookie = `${KEY_COOKIE}=${sendsay.session}`;
     this.user.login = res.login;
     this.user.sublogin = res.sublogin;
     this.error.id = '';
@@ -81,7 +83,7 @@ class UserStore {
     sendsay
       .request({
         action: "pong",
-        session: getCookie("sendsay_ssesion"),
+        session: getCookie(KEY_COOKIE),
       })
       .catch(() => {
         this.logout();
@@ -107,3 +109,5 @@ class UserStore {
 }
 
 export default UserStore;
+
+export const UserStoreContext = createContext<UserStore | null>(null);

@@ -19,9 +19,3 @@ export interface IError {
   id: string;
   explain: string;
 }
-
-export type StoreProps = {
-  store?: {
-    userStore?: UserStore;
-  };
-};

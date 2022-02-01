@@ -5,8 +5,11 @@ import Logo from "../Logo";
 import Main from "../Main/Main";
 import Title from "../Title/Title";
 import Notification from "../Notification/Notification";
-import { inject, observer } from "mobx-react";
-import { StoreProps } from "../../models";
+import { useContext, useEffect } from "react";
+import UserStore, { UserStoreContext } from "../../store/userStore";
+import { observer } from "mobx-react";
+import Router from "next/router";
+import { PATHS } from "../../const";
 
 const Container = styled.div`
   padding: 40px 30px;
@@ -20,25 +23,30 @@ const Container = styled.div`
   }
 `;
 
-const AuthComponent = inject("store")(
-  observer((props: StoreProps): JSX.Element => {
-    const userStore = props.store!.userStore!;
-    return (
-      <Main variant="auth">
-        <Logo />
-        <Container style={{ marginTop: "20px" }}>
-          <Title style={{ marginBottom: "20px" }} variant="auth">
-            {CONTENT.AUTH.TITLE}
-          </Title>
-          <Notification
-            errorMessage={userStore.errorMessage}
-            style={{ marginBottom: "20px" }}
-          />
-          <AuthForm userStore={userStore} />
-        </Container>
-      </Main>
-    );
-  })
-);
+const AuthComponent = observer((): JSX.Element => {
+  const userStore = useContext(UserStoreContext) as UserStore
+
+  useEffect(() => {
+    if(userStore.user.login) {
+      Router.push(PATHS.console)
+    }
+  }, [userStore.user.login])
+
+  return (
+    <Main variant="auth">
+      <Logo />
+      <Container style={{ marginTop: "20px" }}>
+        <Title style={{ marginBottom: "20px" }} variant="auth">
+          {CONTENT.AUTH.TITLE}
+        </Title>
+        <Notification
+          errorMessage={userStore.errorMessage}
+          style={{ marginBottom: "20px" }}
+        />
+        <AuthForm userStore={userStore} />
+      </Container>
+    </Main>
+  );
+});
 
 export default AuthComponent;
