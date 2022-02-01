@@ -1,3 +1,4 @@
 import AuthComponent from "./AuthComponent";
+import ConsoleComponent from "./ConsoleComponent";
 
-export { AuthComponent };
+export { AuthComponent, ConsoleComponent };

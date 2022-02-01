@@ -8,3 +8,5 @@ export const REGX = {
 };
 
 export const KEY_COOKIE = "sendsay_ssesion";
+
+export const MIN_WIDTH_TEXTAREA = 400;

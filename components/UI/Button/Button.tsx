@@ -37,10 +37,39 @@ const ButtonFill = styled.button`
 const ButtonTransparent = styled.button`
   background-color: transparent;
   color: var(--text-color-main);
+  padding: 6px 4px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  cursor: pointer;
+  & svg {
+    transition: all 0.3s ease;
+  }
+  &:hover {
+    color: var(--color-blue);
+    & svg {
+      stroke: var(--color-blue);
+    }
+  }
+  &:focus {
+    outline: 2px solid var(--color-blue-light);
+    border-radius: 7px;
+    color: var(--color-blue);
+    & svg {
+      stroke: var(--color-blue);
+    }
+  }
 `;
 
 const Button = forwardRef<HTMLButtonElement, IPropsButton>(
-  ({ variant = "fill", loading = false, children, disabled, ...props }, ref): JSX.Element => {
+  (
+    { variant = "fill", loading = false, children, disabled, ...props },
+    ref
+  ): JSX.Element => {
     switch (variant) {
       case "fill":
         return (
@@ -49,7 +78,11 @@ const Button = forwardRef<HTMLButtonElement, IPropsButton>(
           </ButtonFill>
         );
       case "transparent":
-        return <ButtonTransparent ref={ref} {...props}>{children}</ButtonTransparent>
+        return (
+          <ButtonTransparent ref={ref} {...props}>
+            {children}
+          </ButtonTransparent>
+        );
       default:
         const a: never = variant;
         return <></>;

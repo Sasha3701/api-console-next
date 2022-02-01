@@ -1,7 +1,8 @@
 import { NextPage } from "next";
+import { ConsoleComponent } from "../components";
 
 const Console: NextPage = (): JSX.Element => {
-  return <div>Console</div>
+  return <ConsoleComponent />;
 };
 
 export default Console;

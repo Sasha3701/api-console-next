@@ -19,3 +19,10 @@ export interface IError {
   id: string;
   explain: string;
 }
+
+export interface IHistory {
+  id: string;
+  title: string;
+  request: string;
+  status: boolean;
+}
