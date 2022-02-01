@@ -4,7 +4,7 @@ import AuthForm from "../AuthForm";
 import Logo from "../Logo";
 import Main from "../Main/Main";
 import Title from "../Title/Title";
-import Notification from "../Notification";
+import Notification from "../Notification/Notification";
 
 const Container = styled.div`
   padding: 40px 30px;
