@@ -33,3 +33,19 @@ export interface IColumn {
   Header: string;
   accessor: string;
 }
+
+export interface IOptionsStatic {
+  responsive: boolean;
+  plugins: Record<string, any>;
+}
+
+export interface IDatasetStatic {
+  label: string;
+  data: number[];
+  backgroundColor: string;
+}
+
+export interface IDataStatic {
+  labels: string[];
+  datasets: IDatasetStatic[];
+}

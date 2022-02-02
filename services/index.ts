@@ -1,7 +1,7 @@
 import { cloneDeep } from "lodash";
 import { v4 } from "uuid";
 import { MAX_HISTORY } from "../const";
-import { IHistory } from "../models";
+import { IDataStatic, IHistory, IOptionsStatic } from "../models";
 import ConsoleStore from "../store/consoleStore";
 import { formatJson, jsonFromStr } from "../utils";
 
@@ -19,7 +19,7 @@ export const addHistory = (
       status,
       title: requestObj.action,
       request: formatJson(state.value),
-      date: Date.now()
+      date: Date.now(),
     };
     return state.console.history.length >= MAX_HISTORY
       ? [
@@ -37,4 +37,46 @@ export const addHistory = (
       (item) => item.id !== newHistory!.id
     ),
   ];
+};
+
+export const createOptions = (): IOptionsStatic => {
+  return {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: "Request Statistics",
+      },
+    },
+  };
+};
+
+export const createData = (array: IHistory[]): IDataStatic => {
+  let countSuccess = 0;
+  let countError = 0;
+  array.forEach((item: IHistory) => {
+    if (item.status) {
+      countSuccess++;
+    } else {
+      countError++;
+    }
+  });
+  return {
+    labels: ["Request"],
+    datasets: [
+      {
+        label: "Success",
+        data: [countSuccess],
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+      },
+      {
+        label: "Error",
+        data: [countError],
+        backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+    ],
+  };
 };
