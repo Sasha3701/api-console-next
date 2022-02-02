@@ -26,7 +26,7 @@ export interface IHistory {
   title: string;
   request: string;
   status: boolean;
-  date: number;
+  date?: number;
 }
 
 export interface IColumn {

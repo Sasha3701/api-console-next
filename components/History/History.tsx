@@ -67,9 +67,9 @@ const History = observer((): JSX.Element => {
       {consoleStore?.console.history.length !== 0 ? (
         <>
           <ListRequests ref={refList} onWheel={handleWheel}>
-            {consoleStore?.console.history.map(({title, id, request, status}) => (
+            {consoleStore?.console.history.map(({title, id, request, status, date}) => (
               <Item key={id}>
-                <Dropdown key={id} id={id} title={title} request={request} status={status} />
+                <Dropdown key={id} id={id} title={title} request={request} status={status} date={date}/>
               </Item>
             ))}
           </ListRequests>
