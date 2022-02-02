@@ -28,6 +28,7 @@ const CustomTextarea = styled.textarea<ITextarea>`
   height: calc(100% - 16px);
   box-sizing: border-box;
   resize: none;
+  transition: all 0.3s;
   box-shadow: ${({ error }): string => error ? `0px 0px 5px rgba(207, 44, 0, 0.5)` : 'none'};
   &:hover {
     border-color: ${({ error }): string =>

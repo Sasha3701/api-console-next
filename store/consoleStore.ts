@@ -128,8 +128,12 @@ class ConsoleStore {
   }
 
   consoleFormat(data: string) {
-    this.value = formatJson(data);
-    this.errorRequest = false;
+    try{
+      this.value = formatJson(data);
+      this.errorRequest = false;
+    } catch(e) {
+      this.errorRequest = true;
+    }
   }
 
   deleteItemHistory(id: string) {

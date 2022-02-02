@@ -47,14 +47,13 @@ const Table = ({ columns, data }: IPropsTable) => {
       data,
     });
 
-  // Render the UI for your table
   return (
     <CustomTable {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           // eslint-disable-next-line react/jsx-key
           <CustomTableRow {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map((column) => (
+            {headerGroup.headers.map((column, i) => (
               // eslint-disable-next-line react/jsx-key
               <CustomTableHeader {...column.getHeaderProps()}>
                 {column.render("Header")}
@@ -64,7 +63,7 @@ const Table = ({ columns, data }: IPropsTable) => {
         ))}
       </thead>
       <tbody {...getTableBodyProps()}>
-        {rows.map((row, i) => {
+        {rows.map((row) => {
           prepareRow(row);
           return (
             // eslint-disable-next-line react/jsx-key
@@ -78,7 +77,7 @@ const Table = ({ columns, data }: IPropsTable) => {
                   );
                 } else if (cell.column.Header === "Date") {
                   return (
-                    <CustomTableColumn>
+                    <CustomTableColumn {...cell.getCellProps()}>
                       {new Date(cell.value).toLocaleDateString("en-US")}
                     </CustomTableColumn>
                   );

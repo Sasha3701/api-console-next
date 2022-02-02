@@ -6,6 +6,7 @@ import Header from "../Header";
 import Console from "../Console/Console";
 import { MIN_WIDTH_TEXTAREA } from "../../const";
 import History from "../History/History";
+import CheckAuth from "../CheckAuth/CheckAuth";
 
 const Wrapper = styled.div`
   display: grid;
@@ -14,16 +15,17 @@ const Wrapper = styled.div`
 `;
 
 const ConsoleComponent = (): JSX.Element => {
-
   return (
-    <Wrapper>
-      <Header />
-      <Main variant="console">
-        <History />
-        <Console minWidth={MIN_WIDTH_TEXTAREA} />
-      </Main>
-      <Footer />
-    </Wrapper>
+    <CheckAuth>
+      <Wrapper>
+        <Header />
+        <Main variant="console">
+          <History />
+          <Console minWidth={MIN_WIDTH_TEXTAREA} />
+        </Main>
+        <Footer />
+      </Wrapper>
+    </CheckAuth>
   );
 };
 

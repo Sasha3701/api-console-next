@@ -1,7 +1,12 @@
 import { cloneDeep } from "lodash";
 import { v4 } from "uuid";
-import { MAX_HISTORY } from "../const";
-import { IDataStatic, IHistory, IOptionsStatic } from "../models";
+import { MAX_HISTORY, OPTIONS_FORMAT_DATE } from "../const";
+import {
+  DateTimeFormatOptions,
+  IDataStatic,
+  IHistory,
+  IOptionsStatic,
+} from "../models";
 import ConsoleStore from "../store/consoleStore";
 import { formatJson, jsonFromStr } from "../utils";
 
@@ -89,6 +94,7 @@ export const createOptionsSin = (
   array: IHistory[]
 ): IOptionsStatic => {
   return {
+    bezierCurve : false,
     responsive: true,
     scales: {
       yAxis: {
@@ -105,7 +111,7 @@ export const createOptionsSin = (
       },
       tooltip: {
         callbacks: {
-          title: () => '',
+          title: () => "",
           footer: (tooltipItems: any) => {
             const customDate = +tooltipItems[0].formattedValue.replace(
               /\s/g,
@@ -122,22 +128,16 @@ export const createOptionsSin = (
 };
 
 export const createDataSin = (array: IHistory[]): IDataStatic => {
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: 'numeric',
-  };
   const labels = array.map((item: IHistory) =>
-    new Date(item.date).toLocaleDateString("en-US", options as any)  
+    new Date(item.date).toLocaleDateString(
+      "en-US",
+      OPTIONS_FORMAT_DATE as DateTimeFormatOptions
+    )
   );
   return {
     labels,
     datasets: [
       {
-        // label: "Request",
         data: array.map((item: IHistory) => item.date),
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
