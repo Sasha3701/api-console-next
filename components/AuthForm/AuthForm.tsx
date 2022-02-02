@@ -1,7 +1,7 @@
 import { Form, Formik } from "formik";
 import styled from "styled-components";
 import { CONTENT } from "../../content";
-import { IUser, StoreProps } from "../../models";
+import { IUser } from "../../models";
 import { inject, Observer, observer } from "mobx-react";
 import { AuthSchema } from "../../utils/Schemes";
 import { Button, Input } from "../UI";
