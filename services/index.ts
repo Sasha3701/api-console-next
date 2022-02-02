@@ -39,7 +39,7 @@ export const addHistory = (
   ];
 };
 
-export const createOptions = (): IOptionsStatic => {
+export const createOptionsStatic = (title: string): IOptionsStatic => {
   return {
     responsive: true,
     plugins: {
@@ -48,13 +48,16 @@ export const createOptions = (): IOptionsStatic => {
       },
       title: {
         display: true,
-        text: "Request Statistics",
+        text: title,
       },
     },
   };
 };
 
-export const createData = (array: IHistory[]): IDataStatic => {
+export const createDataStatic = (
+  array: IHistory[],
+  labels: string[]
+): IDataStatic => {
   let countSuccess = 0;
   let countError = 0;
   array.forEach((item: IHistory) => {
@@ -65,7 +68,7 @@ export const createData = (array: IHistory[]): IDataStatic => {
     }
   });
   return {
-    labels: ["Request"],
+    labels,
     datasets: [
       {
         label: "Success",
@@ -76,6 +79,67 @@ export const createData = (array: IHistory[]): IDataStatic => {
         label: "Error",
         data: [countError],
         backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+    ],
+  };
+};
+
+export const createOptionsSin = (
+  title: string,
+  array: IHistory[]
+): IOptionsStatic => {
+  return {
+    responsive: true,
+    scales: {
+      yAxis: {
+        display: false,
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+      title: {
+        display: true,
+        text: title,
+      },
+      tooltip: {
+        callbacks: {
+          title: () => '',
+          footer: (tooltipItems: any) => {
+            const customDate = +tooltipItems[0].formattedValue.replace(
+              /\s/g,
+              ""
+            );
+            return array.find((item: IHistory) => item.date == customDate)
+              ?.request;
+          },
+          label: () => "",
+        },
+      },
+    },
+  };
+};
+
+export const createDataSin = (array: IHistory[]): IDataStatic => {
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: 'numeric',
+  };
+  const labels = array.map((item: IHistory) =>
+    new Date(item.date).toLocaleDateString("en-US", options as any)  
+  );
+  return {
+    labels,
+    datasets: [
+      {
+        // label: "Request",
+        data: array.map((item: IHistory) => item.date),
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
     ],
   };

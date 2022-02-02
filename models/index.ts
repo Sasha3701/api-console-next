@@ -37,10 +37,11 @@ export interface IColumn {
 export interface IOptionsStatic {
   responsive: boolean;
   plugins: Record<string, any>;
+  scales?: Record<string, any>
 }
 
 export interface IDatasetStatic {
-  label: string;
+  label?: string;
   data: number[];
   backgroundColor: string;
 }
