@@ -129,7 +129,7 @@ export const createOptionsSin = (
 
 export const createDataSin = (array: IHistory[]): IDataStatic => {
   const labels = array.map((item: IHistory) =>
-    new Date(item.date).toLocaleDateString(
+    new Date(item.date as number).toLocaleDateString(
       "en-US",
       OPTIONS_FORMAT_DATE as DateTimeFormatOptions
     )
@@ -138,7 +138,7 @@ export const createDataSin = (array: IHistory[]): IDataStatic => {
     labels,
     datasets: [
       {
-        data: array.map((item: IHistory) => item.date),
+        data: array.map((item: IHistory) => item.date as number),
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
     ],
